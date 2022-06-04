@@ -1,5 +1,6 @@
 import React from "react";
 import { useMapBox } from "../hooks/useMapBox";
+import { useSocketMapbox } from "../hooks/useSocketMapbox";
 
 const INITIAL_POSITION = {
   longitude: -68.843,
@@ -8,7 +9,23 @@ const INITIAL_POSITION = {
 };
 
 export const PageMap = () => {
-  const { setRef, coords } = useMapBox({ INITIAL_POSITION });
+  const {
+    setRef,
+    coords,
+    $newMarker,
+    $movedMarker,
+    addMarker,
+    updateMarkerPosition
+  } = useMapBox({
+    INITIAL_POSITION
+  });
+
+  useSocketMapbox({
+    $newMarker,
+    $movedMarker,
+    addMarker,
+    updateMarkerPosition
+  });
 
   return (
     <>
